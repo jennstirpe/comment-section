@@ -78,7 +78,7 @@ const Mutation = new GraphQLObjectType({
         addUser: {
             type: UserType,
             args: {
-                name: { type: new GraphQLNonNull(GraphQLString) }
+                name: { type: GraphQLNonNull(GraphQLString) }
             },
             resolve(parent, args) {
                 let user = new User({
@@ -91,10 +91,10 @@ const Mutation = new GraphQLObjectType({
         addComment: {
             type: CommentType,
             args: {
-                content: { type: new GraphQLNonNull(GraphQLString) }, 
-                createdAt: { type: new GraphQLNonNull(GraphQLString) },
-                score: { type: new GraphQLNonNull(GraphQLInt)},
-                userId: { type: new GraphQLNonNull(GraphQLID) },
+                content: { type: GraphQLNonNull(GraphQLString) }, 
+                createdAt: { type: GraphQLNonNull(GraphQLString) },
+                score: { type: GraphQLNonNull(GraphQLInt)},
+                userId: { type: GraphQLNonNull(GraphQLID) },
             },
             resolve(parent, args) {
                 let comment = new Comment({
@@ -105,6 +105,39 @@ const Mutation = new GraphQLObjectType({
                 });
 
                 return comment.save();
+            }
+        },
+        deleteComment: {
+            type: CommentType,
+            args: { 
+                id:  { type: GraphQLNonNull(GraphQLID) }
+            },
+            resolve(parent, args) {
+                return Comment.findByIdAndRemove(args.id);
+            }
+        },
+        updateComment: {
+            type: CommentType,
+            args: {
+                id: { type: GraphQLNonNull(GraphQLID) },
+                content: { type: GraphQLString }, 
+                createdAt: { type: GraphQLString },
+                score: { type: GraphQLInt },
+                // userId: { type: GraphQLNonNull(GraphQLID) },
+            },
+            resolve(parent, args) {
+                return Comment.findByIdAndUpdate(
+                    args.id,
+                    // args.userId,
+                    {
+                        $set: {
+                            content: args.content,
+                            createdAt: args.createdAt,
+                            score: args.score
+                        }
+                    },
+                    { new: true }
+                );
             }
         }
     }
