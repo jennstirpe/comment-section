@@ -6,6 +6,7 @@ const commentSchema = new Schema({
     createdAt: String,
     score: Number,
     userId: String,
+    commentId: String,
 });
 
 

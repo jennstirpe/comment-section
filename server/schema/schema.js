@@ -29,9 +29,15 @@ const CommentType = new GraphQLObjectType({
         user: { 
             type: UserType,
             resolve(parent, args) {
-                // find from user list userId === argsID
                 return User.findById(parent.userId)
             }
+        },
+        replyingTo: { 
+            type: CommentType,
+            resolve(parent, args) {
+                return Comment.findById(parent.commentId)
+            }
+        
         },
     })
 });
@@ -68,6 +74,13 @@ const RootQuery = new GraphQLObjectType({
                 return Comment.findById(args.id)
             }
         },
+        replies: {
+            type: new GraphQLList(CommentType),
+            args: { id: {type: GraphQLID} },
+            resolve(parent, args) {
+                return Comment.find({ commentId: args.id })
+            }
+        }
 
     }
 });
@@ -95,13 +108,15 @@ const Mutation = new GraphQLObjectType({
                 createdAt: { type: GraphQLNonNull(GraphQLString) },
                 score: { type: GraphQLNonNull(GraphQLInt)},
                 userId: { type: GraphQLNonNull(GraphQLID) },
-            },
+                commentId: { type: GraphQLID },     // commentId = id of main comment being replied to
+            },                                      // null when a main comment, !null when a reply
             resolve(parent, args) {
                 let comment = new Comment({
                     content: args.content,
                     createdAt: args.createdAt,
                     score: args.score,
                     userId: args.userId,
+                    commentId: args.commentId
                 });
 
                 return comment.save();
@@ -123,12 +138,10 @@ const Mutation = new GraphQLObjectType({
                 content: { type: GraphQLString }, 
                 createdAt: { type: GraphQLString },
                 score: { type: GraphQLInt },
-                // userId: { type: GraphQLNonNull(GraphQLID) },
             },
             resolve(parent, args) {
                 return Comment.findByIdAndUpdate(
                     args.id,
-                    // args.userId,
                     {
                         $set: {
                             content: args.content,
