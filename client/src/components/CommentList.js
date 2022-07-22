@@ -1,12 +1,19 @@
 import React from 'react';
+import { StyledCommentList } from './styled/CommentList.styled';
 import Comment from './Comment';
+import Reply from './Reply';
+
+
 
 export default function CommentList() {
   return (
-    <main className="comments-list">
-          
-          <Comment />
-
-    </main>
+    
+    <StyledCommentList>
+      <Comment />
+      <Reply />
+      <Reply />
+      <Comment />
+    </StyledCommentList> 
+    
   )
 }

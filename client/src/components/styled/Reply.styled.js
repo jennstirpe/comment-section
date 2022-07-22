@@ -1,20 +1,22 @@
 import styled from "styled-components";
 
-export const StyledComment = styled.section`
+export const StyledReply = styled.section`
     background: ${({theme})  => theme.commentBg};
-    min-width: 20rem;
-    max-width: 45rem;
+    width: 80%;
+    min-width: 18rem;
+    max-width: 40rem;
     max-height: 14rem;
     margin: 1rem;
+    margin-left: auto;
     padding: 1rem;
     border-radius: .5rem;
     position: relative;
 
-    .comment-content {
+    .reply-content {
         margin-bottom: 4rem;
     }
 
-    .comment-details {
+    .reply-details {
         display: flex;
         height: 2.5rem;
         align-items: center;
@@ -46,12 +48,18 @@ export const StyledComment = styled.section`
 
     }
 
-    .comment-text {
+    .reply-text {
         margin: 1rem 0;
         line-height: 1.4rem;
+
+        .reply-to {
+            color: ${({theme})  => theme.accent};
+            font-weight: 500;
+            margin-right: .25rem;
+        }
     }
 
-    .comment-votes-counter {
+    .reply-votes-counter {
         position: absolute;
         bottom: 1rem;
         left: 1rem;
@@ -164,14 +172,14 @@ export const StyledComment = styled.section`
 
     @media (min-width: 769px) {
         width: 45rem;
-        height: 10rem; 
+        height: 10rem;
 
-        .comment-content {
+        .reply-content {
             margin-left: 5rem;
             margin-top: .5rem;
         }
 
-        .comment-votes-counter {
+        .reply-votes-counter {
             left: 1.5rem;
             top: 1.5rem;
             width: 3rem;

@@ -7,6 +7,7 @@ import { defaultTheme } from './themes';
 
 // Components
 import CommentList from "./components/CommentList";
+import NewCommentForm from "./components/NewCommentForm";
 
 
 function App() {
@@ -17,6 +18,9 @@ function App() {
         <h1>Comment Section</h1>
 
         <CommentList />
+
+        <NewCommentForm />
+
       </>
     </ThemeProvider>
   );

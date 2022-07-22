@@ -10,7 +10,7 @@ export const GlobalStyles = createGlobalStyle`
 
     body {
         background: ${({theme}) => theme.bodyBg};
-        height: 100vh;
+        /* height: 100vh; */
         width: 100vw;
         display: flex;
         justify-content: center;
