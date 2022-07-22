@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const StyledNewCommentForm = styled.section`
+export const StyledNewReplyForm = styled.section`
     background: ${({theme})  => theme.commentBg};
     min-width: 20rem;
     max-width: 45rem;
@@ -8,14 +8,14 @@ export const StyledNewCommentForm = styled.section`
     padding: 1rem;
     border-radius: .5rem; 
 
-    .new-comment-form {
+    .new-reply-form {
         height: 9rem;
         position: relative;
         display: flex;
         justify-content: center;
     }
 
-    .new-comment-text {
+    .new-reply-text {
         width: 100%;
         height: 3.5rem;
         border-radius: .5rem;
@@ -35,7 +35,7 @@ export const StyledNewCommentForm = styled.section`
         left: 0rem;
     }
 
-    .new-comment-submit {
+    .new-reply-submit {
         position: absolute;
         bottom: 0rem;
         right: 0rem;
@@ -60,23 +60,22 @@ export const StyledNewCommentForm = styled.section`
     @media (min-width: 769px) {
         padding: 1.7rem;
 
-        .new-comment-form {
+        .new-reply-form {
             height: 6rem;
         }
 
-        .new-comment-text {
-            width: 70%;
+        .new-reply-text {
+            width: 68%;
             height: 4.5rem;
-            margin-right: 3rem;
+            margin-right: 3.75rem;
         }
-
 
         .user-img {
             bottom: 3.5rem;
             left: .5rem;
         }
 
-        .new-comment-submit {
+        .new-reply-submit {
             bottom: 2.75rem;
             right: 0rem;
             font-size: 1.1rem;
