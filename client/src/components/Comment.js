@@ -4,15 +4,15 @@ import { StyledComment } from './styled/Comment.styled'
 import amy from '../images/avatars/image-amyrobson.png';
 
 
-export default function Comment() {
+export default function Comment({ comment }) {
   return (
     <StyledComment className="comment">
 
             <div className="comment-content">
                 <div className="comment-details">
                   <img className="user-img" src={amy} alt="Amy Robson" />
-                  <h2 className="username">amyrobson</h2>
-                  <span className="user-flag">you</span>
+                  <h2 className="username">{comment.user.name}</h2>
+                  {comment.user.name === "testuser3" && <span className="user-flag">you</span>}
                   <p className="date-posted">1 month ago</p>
                 </div>
                 <div className="comment-text">
