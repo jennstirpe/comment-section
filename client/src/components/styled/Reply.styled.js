@@ -3,9 +3,7 @@ import styled from "styled-components";
 export const StyledReply = styled.section`
     background: ${({theme})  => theme.commentBg};
     width: 80%;
-    min-width: 18rem;
-    max-width: 40rem;
-    max-height: 14rem;
+    max-height: 15rem;
     margin: 1rem;
     margin-left: auto;
     padding: 1rem;
@@ -117,8 +115,6 @@ export const StyledReply = styled.section`
         background: none;
         transition: all 250ms linear;
 
-        /* display: none; */
-
         &:hover {
             cursor: pointer;
             opacity: .5;
@@ -127,10 +123,6 @@ export const StyledReply = styled.section`
         svg {
             margin-right: .2rem;
         }
-    }
-
-    .updateBtns {
-        display: none;
     }
 
     .delete, .edit {
@@ -171,7 +163,7 @@ export const StyledReply = styled.section`
 
 
     @media (min-width: 769px) {
-        width: 45rem;
+        width: 39rem;
         height: 10rem;
 
         .reply-content {

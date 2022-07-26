@@ -5,7 +5,7 @@ export const StyledComment = styled.section`
     min-width: 20rem;
     max-width: 45rem;
     max-height: 14rem;
-    margin: 1rem;
+    margin: 1.5rem 1rem;
     padding: 1rem;
     border-radius: .5rem;
     position: relative;
@@ -109,8 +109,6 @@ export const StyledComment = styled.section`
         background: none;
         transition: all 250ms linear;
 
-        /* display: none; */
-
         &:hover {
             cursor: pointer;
             opacity: .5;
@@ -119,10 +117,6 @@ export const StyledComment = styled.section`
         svg {
             margin-right: .2rem;
         }
-    }
-
-    .updateBtns {
-        display: none;
     }
 
     .delete, .edit {

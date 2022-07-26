@@ -16,15 +16,24 @@ export const StyledNewCommentForm = styled.section`
     }
 
     .new-comment-text {
-        width: 100%;
+        width: 80%;
         height: 3.5rem;
         border-radius: .5rem;
         border-color: ${({theme}) => theme.inactiveBorder};
         padding: .75rem;
         resize: none;
+        transition: all 250ms linear;
 
         &::placeholder {
             font-family: 'Rubik', sans-serif;
+        }
+
+        &:hover {
+            cursor: pointer;
+            border: 2px solid ${({theme}) => theme.inactiveBorder};
+        }
+        &:focus {
+            outline: 1px solid ${({theme}) => theme.accent};
         }
     }
 
@@ -47,7 +56,7 @@ export const StyledNewCommentForm = styled.section`
         border-radius: .5rem;
         background: ${({theme}) => theme.accent};
         color: #fff;
-        transition: all 200ms ease;
+        transition: all 250ms ease;
 
         &:hover {
             cursor: pointer;
@@ -65,7 +74,7 @@ export const StyledNewCommentForm = styled.section`
         }
 
         .new-comment-text {
-            width: 70%;
+            width: 28rem;
             height: 4.5rem;
             margin-right: 3rem;
         }
@@ -81,7 +90,7 @@ export const StyledNewCommentForm = styled.section`
             right: 0rem;
             font-size: 1.1rem;
             font-weight: 400;
-            padding: 1rem 1.75rem;
+            padding: 1rem 2rem;
         }
 
     }

@@ -8,7 +8,7 @@ export default function NewCommentForm() {
   return (
     <StyledNewCommentForm>
         <form className="new-comment-form">
-            <textarea className="new-comment-text" placeholder="Add a comment..." />
+            <textarea className="new-comment-text" placeholder="Add a comment..." maxlength="200"/>
             <img className="user-img" src={julius} alt="Julius Omo" />
             <button className="new-comment-submit" type="submit">send</button>
         </form>
