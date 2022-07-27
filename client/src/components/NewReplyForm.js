@@ -11,7 +11,7 @@ export default function NewReplyForm({ replyingTo }) {
   return (
     <StyledNewReplyForm>
         <form className="new-reply-form">
-            <textarea className="new-reply-text" placeholder={replyToPlaceholder} />
+            <textarea className="new-reply-text" placeholder={replyToPlaceholder} maxLength="200" />
             <img className="user-img" src={julius} alt="Julius Omo" />
             <button className="new-reply-submit" type="submit">Reply</button>
         </form>

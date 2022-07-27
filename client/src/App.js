@@ -2,6 +2,7 @@
 import { ApolloClient, InMemoryCache, ApolloProvider, HttpLink, from } from '@apollo/client';
 import { onError } from '@apollo/client/link/error';
 
+
 // Styling
 import { GlobalStyles } from "./components/styled/Global";
 import { ThemeProvider } from 'styled-components';
@@ -36,7 +37,8 @@ const client = new ApolloClient({
 
 
 function App() {
-  
+
+
   return (
     <ApolloProvider client={client}>
       <ThemeProvider theme={defaultTheme}>

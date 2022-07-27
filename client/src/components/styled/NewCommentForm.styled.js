@@ -3,10 +3,11 @@ import styled from "styled-components";
 export const StyledNewCommentForm = styled.section`
     background: ${({theme})  => theme.commentBg};
     min-width: 20rem;
-    max-width: 45rem;
     margin: 1rem;
+    margin-bottom: 5rem;
     padding: 1rem;
     border-radius: .5rem; 
+
 
     .new-comment-form {
         height: 9rem;
@@ -68,6 +69,7 @@ export const StyledNewCommentForm = styled.section`
 
     @media (min-width: 769px) {
         padding: 1.7rem;
+        width: 43.5rem;
 
         .new-comment-form {
             height: 6rem;
