@@ -10,10 +10,9 @@ import julius from '../images/avatars/image-juliusomo.png';
 
 
 
-export default function NewCommentForm() {
+export default function NewCommentForm({ userId }) {
 
   const [ newCommentText, setNewCommentText ] =  useState();
-  
 
   const [ addComment, { error } ] = useMutation(ADD_COMMENT);
 

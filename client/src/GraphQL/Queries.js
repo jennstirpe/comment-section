@@ -1,6 +1,6 @@
 import { gql } from '@apollo/client';
 
-export const LOAD_COMMENTS = gql`
+export const LOAD_COMMENTS_AND_USERS = gql`
     query {
         comments {
             id
@@ -15,16 +15,19 @@ export const LOAD_COMMENTS = gql`
               id
             }
           }
+          users {
+            id
+            name
+        }
     }
 `;
 
 
-// export const LOAD_USERS = gql`
-//     query {
-//         users {
-//             id
-//             name
-//             comments
-//         }
-//     }
-// `;
+export const LOAD_USERS = gql`
+    query {
+      users {
+          id
+          name
+      }
+    }
+`;

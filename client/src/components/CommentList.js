@@ -1,94 +1,45 @@
 
-import { StyledCommentList } from './styled/CommentList.styled';
-import { StyledNewUserForm } from './styled/NewUserForm.styled';
+import { useState, useEffect } from 'react';
 import Comment from './Comment';
-
-import { useState, useEffect, useRef } from 'react';
-//Queries
-import { useQuery } from '@apollo/client';
-import { LOAD_COMMENTS } from '../GraphQL/Queries';
-// Mutations
-import { useMutation } from '@apollo/client';
-import { ADD_USER } from '../GraphQL/Mutations';
-
-
-const LOCAL_STORAGE_KEY = "commentAs";
+import { StyledCommentList } from './styled/CommentList.styled';
+import { LOAD_USERS } from '../GraphQL/Queries'
+import { useLazyQuery } from '@apollo/client';
 
 
 
-function CommentList() {
+function CommentList({ mainComments, replyComments, activeUser }) {
 
-  const { data, loading } = useQuery(LOAD_COMMENTS);
-  const [mainComments, setMainComments] = useState([]);
-  const [replyComments, setReplyComments] =  useState([]);
 
-  const [user, setUser] = useState("");
-  const usernameInput = useRef();
-  const [ addUser ] = useMutation(ADD_USER);
+  const [ getUsers ] = useLazyQuery(LOAD_USERS);
+  const [ user, setUser ] = useState();
 
-  // Set state for comments and replies
   useEffect(() => {
-      if(data) {
-        setMainComments(data.comments.filter(comment => comment.replyingTo === null));
-        setReplyComments(data.comments.filter(comment => comment.replyingTo !== null));
+    let allUsers;
+
+    async function fetchUsers() {
+      const res = await getUsers();
+      if(res.data) {
+        allUsers = res.data.users;
+        console.log(allUsers)
+        setUser(allUsers.find(user => user.name === activeUser))
       }
-  }, [data]);
-
-  // Set state for username
-  useEffect(() => {
-    const storedUserName = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY));
-    if(storedUserName) {
-      setUser(storedUserName)
     }
-  }, []);
+    fetchUsers();
+    
+  }, [activeUser])
 
-  useEffect(() => {
-    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(user));
-    // Add new username to DB
-    if(usernameInput.current.value !== "") {
-      addUser({
-        variables: {
-          name: user,
-        }
-      })
-    }
-  }, [user]);
-
-
-  function handleAddUser(e) {
-    e.preventDefault()
-    if(usernameInput.current.value == "" || usernameInput.current.value == null ) {
-      return
-    } else {
-      const newUserName = usernameInput.current.value;
-      setUser(newUserName);
-    }
-
-    usernameInput.current.value = null;
-  }
-
-
-  return (
-
-    <>
   
-      <StyledNewUserForm>
-        <form className="newUserForm">
-            <input ref={usernameInput} type="text" placeholder="Comment as..." maxLength="25" />
-            <button onClick={handleAddUser}>+</button>
-        </form>
-        { user && <p className="currentUser">Now commenting as: <span className="username">{user}</span></p>}
-      </StyledNewUserForm>
+  console.log(activeUser)
+
+    return (
 
       <StyledCommentList>
-        {mainComments.map(comment => {
-          return <Comment key={comment.id} comment={comment} replies={replyComments} />
-        })}
+          {mainComments.map(comment => {
+            return <Comment key={comment.id} user={user} comment={comment} replies={replyComments} />
+          })}
       </StyledCommentList> 
+    )
+  }
 
-    </>
-    
-  )
-}
 
 export default CommentList;
